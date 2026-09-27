@@ -1,0 +1,13 @@
+{
+  "name": "edinburgh-neighbourhood-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Edinburgh neighbourhood boundaries and pub guide",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

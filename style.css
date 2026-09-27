@@ -1,0 +1,562 @@
+:root {
+  --color-bg: #f7f5f0;
+  --color-ink: #1f2421;
+  --color-ink-soft: #5a6259;
+  --color-accent: #2f6f4f;
+  --color-accent-hover: #244f38;
+  --color-fill: #6fae8c;
+  --color-fill-hover: #2f6f4f;
+  --color-border: #d8d3c7;
+  --color-panel-bg: #ffffff;
+  --shadow: 0 8px 24px rgba(31, 36, 33, 0.12);
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-ink);
+  background: var(--color-bg);
+}
+
+#app {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 20px 12px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(247, 245, 240, 0.92) 0%, rgba(247, 245, 240, 0) 100%);
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+#header .subtitle {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+  background: #eef0ea;
+}
+
+/* Dataset switcher */
+#dataset-switcher {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  background: var(--color-panel-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 4px;
+  gap: 2px;
+}
+
+.dataset-tab {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  padding: 7px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dataset-tab:hover {
+  color: var(--color-ink);
+}
+
+.dataset-tab.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Pub toolbar */
+#pub-toolbar {
+  position: absolute;
+  top: 62px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: var(--color-panel-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px 10px;
+  gap: 10px;
+  font-size: 0.82rem;
+}
+
+.pub-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.pub-toolbar-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel-bg);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pub-toolbar-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.pub-toolbar-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* Pub markers */
+.pub-marker-icon {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #b5533c;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(31, 36, 33, 0.4);
+}
+
+.pub-marker-icon.visited {
+  background: var(--color-accent);
+}
+
+/* Pub detail controls (inside #info-details when showing a pub) */
+.pub-field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.pub-visited-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 8px 0 4px;
+  cursor: pointer;
+}
+
+.pub-price-options {
+  display: flex;
+  gap: 4px;
+}
+
+.pub-price-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel-bg);
+  color: var(--color-ink-soft);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pub-price-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.pub-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.pub-star-btn {
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-border);
+}
+
+.pub-star-btn.filled {
+  color: #f2a541;
+}
+
+.pub-detail-link {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+}
+
+.pub-add-area-btn {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid var(--color-accent);
+  background: var(--color-panel-bg);
+  color: var(--color-accent);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.pub-add-area-btn:hover {
+  background: #eef4ef;
+}
+
+.pub-add-area-btn.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Checklist sidebar */
+#checklist-sidebar {
+  position: absolute;
+  top: 70px;
+  right: 16px;
+  bottom: 90px;
+  z-index: 999;
+  width: min(320px, calc(100vw - 32px));
+  background: var(--color-panel-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+#checklist-sidebar.hidden {
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+}
+
+#checklist-header {
+  position: relative;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+#checklist-header h2 {
+  margin: 0 24px 4px 0;
+  font-size: 1.05rem;
+}
+
+#checklist-summary {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+#checklist-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-ink-soft);
+  padding: 4px;
+}
+
+#checklist-close:hover {
+  color: var(--color-ink);
+}
+
+#checklist-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.area-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #eef4ef;
+  color: var(--color-accent-hover);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 4px 6px 4px 9px;
+  border-radius: 999px;
+}
+
+.area-chip button {
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clear-areas-btn {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 0 0;
+}
+
+#checklist-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.checklist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border-bottom: 1px solid #f0eee7;
+  cursor: pointer;
+}
+
+.checklist-row:hover {
+  background: #f7f9f7;
+}
+
+.checklist-row input[type="checkbox"] {
+  flex-shrink: 0;
+}
+
+.checklist-row-name {
+  flex: 1;
+  font-size: 0.85rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.checklist-row-badges {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--color-ink-soft);
+}
+
+/* Search box */
+#search-box {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  width: min(280px, calc(100vw - 32px));
+}
+
+#search-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-panel-bg);
+  box-shadow: var(--shadow);
+  outline: none;
+  color: var(--color-ink);
+}
+
+#search-input:focus {
+  border-color: var(--color-accent);
+}
+
+#search-results {
+  margin-top: 6px;
+  background: var(--color-panel-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 260px;
+  overflow-y: auto;
+  display: none;
+}
+
+#search-results.visible {
+  display: block;
+}
+
+.search-result {
+  padding: 9px 14px;
+  font-size: 0.87rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f0eee7;
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+
+.search-result:hover,
+.search-result.active {
+  background: #eef4ef;
+  color: var(--color-accent-hover);
+}
+
+/* Info panel */
+#info-panel {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 1000;
+  width: min(320px, calc(100vw - 32px));
+  background: var(--color-panel-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+#info-panel.hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+#info-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-ink-soft);
+  padding: 4px;
+}
+
+#info-close:hover {
+  color: var(--color-ink);
+}
+
+#info-name {
+  margin: 0 24px 10px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+#info-details {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+}
+
+#info-details dt {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+#info-details dd {
+  margin: 0;
+}
+
+/* Leaflet tooltip override */
+.neighbourhood-tooltip {
+  background: var(--color-ink);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.neighbourhood-tooltip::before {
+  display: none;
+}
+
+/* Leaflet gives interactive SVG paths tabindex="0" for keyboard a11y;
+   the browser's default focus ring then shows as a box around whichever
+   polygon a click/drag started on. Replace it with nothing visible. */
+.leaflet-interactive:focus,
+.leaflet-interactive:focus-visible {
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  #search-box {
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+  #info-panel {
+    right: 16px;
+    width: auto;
+  }
+  #dataset-switcher {
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    flex-wrap: wrap;
+  }
+  .dataset-tab {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  #pub-toolbar {
+    top: 122px;
+    left: 16px;
+    right: 16px;
+    flex-wrap: wrap;
+  }
+  #checklist-sidebar {
+    top: 178px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+}

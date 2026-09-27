@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edinburgh Neighbourhoods</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+    integrity="sha384-pmjIAcz2bAn0xukfxADbZIb3t8oRT9Sv0rvO+BR5Csr6Dhqq+nZs59P0pPKQJkEV" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+    integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"
+    integrity="sha384-NZLkVuBRMEeB4VeZz27WwTRvlhec30biQ8Xx7zG7JJnkvEKRg5qi6BNbEXo9ydwv" crossorigin="" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="header">
+      <h1>Edinburgh Neighbourhoods</h1>
+      <p class="subtitle" id="header-subtitle">Natural Neighbourhoods &mdash; City of Edinburgh Council</p>
+    </header>
+
+    <div id="map"></div>
+
+    <div id="dataset-switcher" role="tablist" aria-label="Boundary set"></div>
+
+    <div id="pub-toolbar">
+      <label class="pub-toggle">
+        <input type="checkbox" id="pubs-visible-toggle" checked />
+        Pubs &amp; bars
+      </label>
+      <button type="button" id="draw-area-btn" class="pub-toolbar-btn">Draw area</button>
+      <button type="button" id="checklist-toggle-btn" class="pub-toolbar-btn">Checklist</button>
+    </div>
+
+    <div id="info-panel" class="hidden">
+      <button id="info-close" aria-label="Close">&times;</button>
+      <h2 id="info-name">&nbsp;</h2>
+      <div id="info-details"></div>
+    </div>
+
+    <div id="checklist-sidebar" class="hidden">
+      <div id="checklist-header">
+        <button id="checklist-close" aria-label="Close">&times;</button>
+        <h2>Pub checklist</h2>
+        <p id="checklist-summary"></p>
+        <div id="checklist-areas"></div>
+      </div>
+      <div id="checklist-list"></div>
+    </div>
+
+    <div id="search-box">
+      <input type="text" id="search-input" placeholder="Find a neighbourhood&hellip;" autocomplete="off" />
+      <div id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
+    integrity="sha384-eXVCORTRlv4FUUgS/xmOyr66XBVraen8ATNLMESp92FKXLAMiKkerixTiBvXriZr" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"
+    integrity="sha384-JP5UPxIO2Tm2o79Fb0tGYMa44jkWar53aBoCbd8ah0+LcCDoohTIYr+zIXyfGIJN" crossorigin=""></script>
+  <script src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"
+    integrity="sha384-ll8qH0IE3im19Dtlr1jtv5fdy+gm+0bx8T4+OYxPeJpc6PO1XLNFnyvdzaKJ78bU" crossorigin=""></script>
+  <script src="map.js"></script>
+</body>
+</html>
